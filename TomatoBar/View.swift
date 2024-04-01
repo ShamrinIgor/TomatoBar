@@ -160,6 +160,22 @@ struct TBPopoverView: View {
             }
             .controlSize(.large)
             .keyboardShortcut(.defaultAction)
+            
+            Text("\(timer.timersCount) tomatos")
+                .frame(maxWidth: .infinity, alignment: .center)
+            
+            if timer.timersCount > 0 {
+                Text("\(Array(repeating: "🍅", count: timer.timersCount).joined())")
+                    .frame(maxWidth: .infinity, alignment: .center)
+            }
+            
+            Button {
+                timer.resetCount()
+            } label: {
+                Text("Reset tomatos")
+                    .frame(maxWidth: .infinity)
+            }
+            .controlSize(.large)
 
             Picker("", selection: $activeChildView) {
                 Text(NSLocalizedString("TBPopoverView.intervals.label",

@@ -20,6 +20,7 @@ class TBTimer: ObservableObject {
     private var timerFormatter = DateComponentsFormatter()
     @Published var timeLeftString: String = ""
     @Published var timer: DispatchSourceTimer?
+    @Published var timersCount = 0
 
     init() {
         /*
@@ -127,6 +128,10 @@ class TBTimer: ObservableObject {
             TBStatusItem.shared.setTitle(title: nil)
         }
     }
+    
+    func resetCount() {
+        timersCount = 0
+    }
 
     private func startTimer(seconds: Int) {
         finishTime = Date().addingTimeInterval(TimeInterval(seconds))
@@ -183,6 +188,7 @@ class TBTimer: ObservableObject {
     }
 
     private func onWorkFinish(context _: TBStateMachine.Context) {
+        timersCount += 1
         consecutiveWorkIntervals += 1
         player.playDing()
     }
